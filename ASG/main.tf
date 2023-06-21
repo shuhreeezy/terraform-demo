@@ -57,7 +57,7 @@ resource "aws_security_group" "lb-firewall" {
 
 resource "aws_elb" "bar" {
   name = "foobar-terraform-elbs"
-  subnets = data.terraform_remote_state.vpc.outputs.azs
+  subnets = data.terraform_remote_state.vpc.outputs.public_subnets
   security_groups = [aws_security_group.lb-firewall.id]
 
 
@@ -81,5 +81,13 @@ cross_zone_load_balancing = true
 idle_timeout = 400
 connection_draining = true
 connection_draining_timeout = 400
+}
+
+resource "aws_route53_record" "blog" {
+  zone_id = "Z05854482NMHAXP8V4EMO"
+  name    = "blog"
+  type    = "CNAME"
+  ttl     = 5
+  records = [aws_elb.bar.dns_name]
 }
 

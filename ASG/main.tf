@@ -57,7 +57,7 @@ resource "aws_security_group" "lb-firewall" {
 
 resource "aws_elb" "bar" {
   name = "foobar-terraform-elbs"
-  Subnet = data.terraform_remote_state.vpc.outputs.azs
+  subnets = data.terraform_remote_state.vpc.outputs.azs
   security_groups = [aws_security_group.lb-firewall.id]
 
 

@@ -10,3 +10,7 @@ output public_subnets {
 output azs {
     value = module.vpc.azs
 }
+
+output id {
+    value = module.vpc.id
+}

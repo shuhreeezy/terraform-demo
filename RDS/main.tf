@@ -4,7 +4,7 @@ data "terraform_remote_state" "vpc" {
   config = {
     organization = "Shuhrat"
     workspaces = {
-      name = "my-vpc"
+      name = "vpc"
     }
   }
 }
